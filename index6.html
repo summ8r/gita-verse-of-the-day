@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhagavad Gita - Verse of the Day</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .font-english { font-family: 'Alegreya', serif; }
+        .font-sanskrit { font-family: 'Tiro Devanagari Hindi', serif; }
+
+        :root {
+            --bg-card: rgba(45, 29, 11, 0.4);
+            --border-card: rgba(139, 69, 19, 0.5);
+            --text-primary: #F0D9B1;
+            --text-secondary: #E0BA8F;
+            --text-sanskrit: #FFD700;
+            --btn-primary-bg: #8B4513;
+            --btn-primary-hover-bg: #A0522D;
+            --btn-secondary-bg: transparent;
+            --btn-secondary-border: #8B4513;
+            --btn-secondary-hover-bg: rgba(139, 69, 19, 0.2);
+        }
+
+        [data-theme="indigo-night"] {
+            --bg-card: rgba(17, 24, 39, 0.5);
+            --border-card: rgba(71, 85, 105, 0.6);
+            --text-primary: #D6E3F8;
+            --text-secondary: #9FAECF;
+            --text-sanskrit: #C0CFFD;
+            --btn-primary-bg: #3F51B5;
+            --btn-primary-hover-bg: #303F9F;
+            --btn-secondary-bg: transparent;
+            --btn-secondary-border: #3F51B5;
+            --btn-secondary-hover-bg: rgba(63, 81, 181, 0.1);
+        }
+        
+        [data-theme="forest-dawn"] {
+            --bg-card: rgba(16, 42, 30, 0.5);
+            --border-card: rgba(34, 197, 94, 0.3);
+            --text-primary: #E6FCEE;
+            --text-secondary: #C4EED1;
+            --text-sanskrit: #FDE047;
+            --btn-primary-bg: #228B22;
+            --btn-primary-hover-bg: #1B7A1B;
+            --btn-secondary-bg: transparent;
+            --btn-secondary-border: #228B22;
+            --btn-secondary-hover-bg: rgba(34, 139, 34, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-cover bg-center bg-no-repeat min-h-screen font-english transition-all duration-1000">
+
+    <main class="min-h-screen w-full flex items-center justify-center p-4 bg-black/40">
+        <div id="card" class="w-full max-w-3xl rounded-2xl p-6 md:p-10 shadow-2xl backdrop-blur-xl transition-colors duration-500"
+             style="background-color: var(--bg-card); border: 1px solid var(--border-card);">
+            
+            <div id="logoSection" class="text-center mb-6">
+                 <img id="logoImage" src="my logo.png" alt="My Custom Logo" class="h-14 mx-auto">
+            </div>
+
+            <div class="space-y-6 text-center">
+                <p id="shlokaSanskrit" class="font-sanskrit text-2xl md:text-3xl leading-relaxed" style="color: var(--text-sanskrit);"></p>
+                <p id="shlokaTransliteration" class="font-english italic text-lg md:text-xl" style="color: var(--text-secondary);"></p>
+                <p id="shlokaHindi" class="font-sanskrit text-lg md:text-xl" style="color: var(--text-primary);"></p>
+                <p id="shlokaEnglish" class="font-english text-lg md:text-xl" style="color: var(--text-primary);"></p>
+            </div>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <button id="newShlokaBtn" class="w-full sm:w-auto px-6 py-3 rounded-lg text-white font-bold shadow-md transition-transform transform hover:scale-105"
+                        style="background-color: var(--btn-primary-bg);">Receive a New Shloka</button>
+                <button id="explainBtn" class="w-full sm:w-auto px-6 py-3 rounded-lg font-bold border-2 shadow-md transition-transform transform hover:scale-105"
+                        style="border-color: var(--btn-secondary-border); background-color: var(--btn-secondary-bg); color: var(--text-primary);">Explain this Verse</button>
+            </div>
+
+            <div id="explanationArea" class="mt-8 p-6 rounded-lg min-h-[100px] transition-colors duration-500" style="background-color: rgba(0,0,0,0.2);"></div>
+
+            <div class="mt-8 pt-6 border-t flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color: var(--border-card);">
+                <div class="flex gap-4">
+                    <button id="changeBgBtn" class="px-4 py-2 text-sm rounded-md" style="background-color: rgba(0,0,0,0.2); color: var(--text-secondary);">Change Background</button>
+                    <button id="changeThemeBtn" class="px-4 py-2 text-sm rounded-md" style="background-color: rgba(0,0,0,0.2); color: var(--text-secondary);">Change Theme</button>
+                </div>
+                <div class="text-sm flex gap-4" style="color: var(--text-secondary);">
+                    <a href="#" id="aboutLink" class="hover:underline">About Us</a>
+                    <a href="#" id="privacyLink" class="hover:underline">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="aboutModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="w-full max-w-lg rounded-lg shadow-xl p-6 relative"
+             style="background-color: var(--bg-card); border: 1px solid var(--border-card);">
+            <button id="closeAboutModalBtn" class="absolute top-4 right-4 text-2xl font-bold hover:text-white" style="color: var(--text-secondary);">&times;</button>
+            <h2 class="text-2xl font-bold mb-4" style="color: var(--text-primary);">About This Project</h2>
+            <div class="space-y-4" style="color: var(--text-secondary);">
+                <p>This application is a humble offering designed to bring the timeless wisdom of the Bhagavad Gita to you, one verse at a time. Our goal is to blend ancient spiritual knowledge with modern, accessible technology.</p>
+                <p>Each day, you can receive a new shloka to inspire contemplation and inner peace. The AI-powered "Explain this Verse" feature aims to provide simple, contemporary interpretations to make these profound teachings more relatable.</p>
+                <p><strong>Contact Us:</strong> For any feedback or inquiries, please reach out to us at <a href="mailto:contact@example.com" class="underline" style="color: var(--text-primary);">contact@example.com</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="privacyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="w-full max-w-lg rounded-lg shadow-xl p-6 relative"
+             style="background-color: var(--bg-card); border: 1px solid var(--border-card);">
+            <button id="closePrivacyModalBtn" class="absolute top-4 right-4 text-2xl font-bold hover:text-white" style="color: var(--text-secondary);">&times;</button>
+            <h2 class="text-2xl font-bold mb-4" style="color: var(--text-primary);">Privacy & Ads Policy</h2>
+            <div class="space-y-4" style="color: var(--text-secondary);">
+                <p><strong>Privacy:</strong> This web application is a client-side project. All data, including the shlokas, is stored within the application itself. We do not collect, store, or transmit any personal information from you.</p>
+                <p><strong>API Usage:</strong> The "Explain this Verse" feature sends the text of the currently displayed verse to the Google Gemini API to generate an explanation. No personal data is sent with this request. Usage of this feature is subject to Google's API policies.</p>
+                <p><strong>Ads:</strong> This application is for demonstration and personal enrichment. It does not contain any advertisements.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- DATA ---
+            const shlokas = [
+                {sanskrit: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",transliteration: "karmaṇy-evādhikāras te mā phaleṣhu kadāchana\nmā karma-phala-hetur bhūr mā te saṅgo ’stvakarmaṇi",hindi: "तुम्हारा कर्म करने में ही अधिकार है, उसके फलों में कभी नहीं। इसलिए तुम कर्मों के फल हेतु मत होओ और तुम्हारी कर्म न करने में भी आसक्ति न हो।",english: "You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions. Never consider yourself to be the cause of the results of your activities, nor be attached to inaction."},
+                {sanskrit: "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥",transliteration: "yadā yadā hi dharmasya glānir bhavati bhārata\nabhyutthānam adharmasya tadātmānaṁ sṛijāmyaham",hindi: "हे भारत! जब-जब धर्म की हानि और अधर्म की वृद्धि होती है, तब-तब ही मैं अपने रूप को रचता हूँ अर्थात् साकार रूप से लोगों के सम्मुख प्रकट होता हूँ।",english: "Whenever and wherever there is a decline in righteousness and a predominant rise of unrighteousness—at that time I descend Myself, O descendant of Bharata."},
+                {sanskrit: "ध्यायतो विषयान्पुंसः सङ्गस्तेषूपजायते।\nसङ्गात्सञ्जायते कामः कामात्क्रोधोऽभिजायते॥",transliteration: "dhyāyato viṣhayān puṁsaḥ saṅgas teṣhūpajāyate\nsaṅgāt sañjāyate kāmaḥ kāmāt krodho ’bhijāyate",hindi: "विषयों का चिन्तन करने वाले पुरुष की उन विषयों में आसक्ति उत्पन्न हो जाती है, आसक्ति से कामना उत्पन्न होती है और कामना से क्रोध उत्पन्न होता है।",english: "While contemplating the objects of the senses, a person develops attachment for them, and from such attachment lust develops, and from lust anger arises."},
+                {sanskrit: "हतो वा प्राप्स्यसि स्वर्गं जित्वा वा भोक्ष्यसे महीम्।\nतस्मादुत्तिष्ठ कौन्तेय युद्धाय कृतनिश्चयः॥",transliteration: "hato vā prāpsyasi swargaṁ jitvā vā bhokṣhyase mahīm\ntasmād uttiṣhṭha kaunteya yuddhāya kṛita-niśhchayaḥ",hindi: "यदि तुम युद्ध में मारे जाओगे तो स्वर्ग को प्राप्त करोगे, और यदि तुम जीत जाओगे तो पृथ्वी के राज्य का भोग करोगे। इसलिए, हे कुंतीपुत्र! युद्ध का निश्चय करके खड़े हो जाओ।",english: "If you are killed, you will attain heaven; if you be victorious, you will enjoy the kingdom. Therefore, arise, O son of Kunti, determined to fight."}
+            ];
+
+            const backgroundImages = ['https://images.unsplash.com/photo-1577777174620-1c6d86a603c5?q=80&w=2070&auto=format&fit=crop','https://images.unsplash.com/photo-1542280249-173a19420656?q=80&w=2070&auto=format&fit=crop','https://images.unsplash.com/photo-1594535179245-a73a626593b7?q=80&w=2070&auto=format&fit=crop','https://images.unsplash.com/photo-1531853121101-cb94c8ed2182?q=80&w=1966&auto=format&fit=crop','https://images.unsplash.com/photo-1620689625338-4db4152458a3?q=80&w=1932&auto=format&fit=crop'];
+            const themes = ['golden-light', 'indigo-night', 'forest-dawn'];
+
+            // --- DOM ELEMENTS ---
+            const shlokaSanskritEl = document.getElementById('shlokaSanskrit');
+            const shlokaTransliterationEl = document.getElementById('shlokaTransliteration');
+            const shlokaHindiEl = document.getElementById('shlokaHindi');
+            const shlokaEnglishEl = document.getElementById('shlokaEnglish');
+            const newShlokaBtn = document.getElementById('newShlokaBtn');
+            const explainBtn = document.getElementById('explainBtn');
+            const explanationArea = document.getElementById('explanationArea');
+            const changeBgBtn = document.getElementById('changeBgBtn');
+            const changeThemeBtn = document.getElementById('changeThemeBtn');
+            const privacyLink = document.getElementById('privacyLink');
+            const privacyModal = document.getElementById('privacyModal');
+            const closePrivacyModalBtn = document.getElementById('closePrivacyModalBtn');
+            const aboutLink = document.getElementById('aboutLink');
+            const aboutModal = document.getElementById('aboutModal');
+            const closeAboutModalBtn = document.getElementById('closeAboutModalBtn');
+
+            // --- STATE ---
+            let currentShlokaIndex = -1, currentBgIndex = 0, currentThemeIndex = 0, currentShloka = null;
+
+            // --- SPINNER ---
+            const loadingSpinner = `<div class="flex justify-center items-center h-full"><div class="animate-spin rounded-full h-10 w-10 border-b-2" style="border-color: var(--text-sanskrit);"></div></div>`;
+
+            // --- FUNCTIONS ---
+            function getRandomShloka() {let newIndex;do {newIndex = Math.floor(Math.random() * shlokas.length);} while (newIndex === currentShlokaIndex);currentShlokaIndex = newIndex;return shlokas[currentShlokaIndex];}
+            function displayShloka(shloka) {currentShloka = shloka;shlokaSanskritEl.innerText = shloka.sanskrit;shlokaTransliterationEl.innerText = shloka.transliteration;shlokaHindiEl.innerText = shloka.hindi;shlokaEnglishEl.innerText = shloka.english;explanationArea.innerHTML = '<p class="text-center" style="color: var(--text-secondary);">Click "Explain this Verse" for an AI-powered explanation.</p>';}
+            function showNewShloka() {const shloka = getRandomShloka();displayShloka(shloka);}
+            function changeBackground() {currentBgIndex = (currentBgIndex + 1) % backgroundImages.length;document.body.style.backgroundImage = `url('${backgroundImages[currentBgIndex]}')`;}
+            function changeTheme() {currentThemeIndex = (currentThemeIndex + 1) % themes.length;document.documentElement.setAttribute('data-theme', themes[currentThemeIndex]);}
+            
+            function togglePrivacyModal(show) {privacyModal.classList.toggle('hidden', !show);}
+            function toggleAboutModal(show) {aboutModal.classList.toggle('hidden', !show);}
+
+            // --- REAL API CALL for Gemini ---
+            // WARNING: This method exposes your API key in the browser. 
+            // Use only for personal, local development. Do not deploy to a public website this way.
+            async function getAIExplanation(verse) {
+                explanationArea.innerHTML = loadingSpinner;
+                
+                // V V V PASTE YOUR API KEY ON THE NEXT LINE V V V
+                const API_KEY = 'AIzaSyCgpqVm933sdiVve1pPCrm65pI-TVVyW4M'; // I have replaced your key with a placeholder for security.
+                
+                // ## THIS IS THE FIXED URL ##
+                const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
+
+                const prompt = `Act as a spiritual guide. Explain the following verse from the Bhagavad Gita in a simple, modern, and profound way for someone new to these concepts. Verse: "${verse}"`;
+
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const explanation = data.candidates[0].content.parts[0].text;
+                    return explanation;
+
+                } catch (error) {
+                    console.error("Error calling Gemini API:", error);
+                    return "Sorry, I was unable to generate an explanation at this time.";
+                }
+            }
+
+            // --- EVENT LISTENERS ---
+            newShlokaBtn.addEventListener('click', showNewShloka);
+            changeBgBtn.addEventListener('click', changeBgBtn);
+            changeThemeBtn.addEventListener('click', changeTheme);
+            
+            privacyLink.addEventListener('click', (e) => { e.preventDefault(); togglePrivacyModal(true); });
+            closePrivacyModalBtn.addEventListener('click', () => togglePrivacyModal(false));
+            privacyModal.addEventListener('click', (e) => { if (e.target === privacyModal) togglePrivacyModal(false); });
+
+            aboutLink.addEventListener('click', (e) => { e.preventDefault(); toggleAboutModal(true); });
+            closeAboutModalBtn.addEventListener('click', () => toggleAboutModal(false));
+            aboutModal.addEventListener('click', (e) => { if (e.target === aboutModal) toggleAboutModal(false); });
+
+            explainBtn.addEventListener('click', async () => {
+                if (!currentShloka) return;
+                try {
+                    const explanation = await getAIExplanation(currentShloka.english);
+                    explanationArea.innerHTML = `<p style="white-space: pre-wrap; color: var(--text-primary);">${explanation}</p>`;
+                } catch (error) {
+                    console.error("Error fetching explanation:", error);
+                    explanationArea.innerHTML = `<p class="text-red-400">Sorry, an error occurred while generating the explanation.</p>`;
+                }
+            });
+
+            // --- INITIAL LOAD ---
+            document.body.style.backgroundImage = `url('${backgroundImages[currentBgIndex]}')`;
+            document.documentElement.setAttribute('data-theme', themes[currentThemeIndex]);
+            showNewShloka();
+        });
+    </script>
+
+</body>
+</html>
